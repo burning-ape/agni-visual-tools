@@ -353,6 +353,57 @@ input[type=file]{display:none}
   border-top:1px solid var(--bd);background:#000;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em}
 .statusbar b{color:var(--ac);font-weight:500}
 .statusbar::before{content:'';width:6px;height:6px;background:var(--ac);border-radius:50%;box-shadow:0 0 6px var(--ac)}
+
+/* ── Color Replacer ── */
+#cr-app{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;flex-direction:column}
+.cr-header{height:42px;display:flex;align-items:center;gap:10px;padding:0 16px;background:#000;border-bottom:1px solid var(--bd);flex-shrink:0}
+.cr-back{background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px;padding:0 8px 0 0;line-height:1}
+.cr-back:hover{color:var(--ink)}
+.cr-title{font-family:var(--sans);font-size:13px;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:0.04em;display:flex;align-items:center;gap:8px}
+.cr-title em{color:var(--ac);font-style:normal}
+.cr-title .crumb{color:var(--dim);font-weight:500}
+.cr-title svg{width:13px;height:17px;flex-shrink:0}
+.cr-status{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em}
+.cr-status b{color:var(--ac);font-weight:500}
+.cr-body{flex:1;display:flex;min-height:0;overflow:hidden}
+.cr-canvas-area{flex:1;display:flex;flex-direction:column;
+  background:repeating-conic-gradient(#1a1c22 0% 25%, #22242d 0% 50%) 0 0/24px 24px;
+  position:relative;overflow:hidden;padding:0}
+.cr-viewport{flex:1;width:100%;overflow:hidden;position:relative}
+.cr-mask-panel{flex-shrink:0;width:100%;background:#0a0a0a;border-top:1px solid var(--bd);display:none;flex-direction:column}
+.cr-mask-panel.visible{display:flex}
+.cr-mask-panel-head{padding:6px 14px;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.cr-mask-panel-head::before{content:'';width:8px;height:1px;background:var(--ac)}
+.cr-mask-canvas-wrap{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:12px;min-height:0;max-height:220px}
+.cr-drop{padding:64px 80px;border:2px dashed var(--bd);text-align:center;color:var(--dim);
+  font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;
+  background:rgba(0,0,0,0.4);cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.cr-drop:hover,.cr-drop.over{border-color:var(--ac);color:var(--ac);background:rgba(255,90,31,0.05)}
+.cr-drop .di{font-family:var(--sans);font-weight:900;font-size:48px;display:block;margin-bottom:16px;color:var(--ink);letter-spacing:-0.02em}
+.cr-drop:hover .di{color:var(--ac)}
+.cr-drop .ds{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:10px;text-transform:uppercase;letter-spacing:0.08em}
+#cr-canvas-wrap{position:absolute;transform-origin:center center;cursor:crosshair;will-change:transform}
+#cr-canvas-main{display:block}
+#cr-mask-static{display:block}
+.cr-side{width:270px;flex-shrink:0;background:var(--s1);border-left:1px solid var(--bd);overflow-y:auto;display:flex;flex-direction:column}
+.cr-sec{border-bottom:1px solid var(--bd);padding:12px 14px}
+.cr-sec h3{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cr-sec h3::before{content:'';width:8px;height:1px;background:var(--ac)}
+.cr-algo-tabs{display:flex;gap:1px;background:var(--bd);border:1px solid var(--bd);margin-bottom:8px}
+.cr-tab{flex:1;padding:7px 4px;background:var(--s2);color:var(--dim);cursor:pointer;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;text-align:center;border:none;transition:background .12s,color .12s}
+.cr-tab:hover{color:var(--ink)}
+.cr-tab.active{background:#1a0d07;color:var(--ac)}
+.cr-algo-desc{font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.6;padding:8px;background:var(--s2);border-left:2px solid var(--ac)}
+.cr-color-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.cr-color-row label{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;width:44px;flex-shrink:0}
+.cr-swatch{width:34px;height:24px;border:1px solid var(--bd);cursor:pointer;flex-shrink:0}
+.cr-swatch:hover{border-color:var(--dim)}
+.cr-hex{font-family:var(--mono);font-size:10px;color:var(--dim);flex:1}
+.cr-eyedrop{background:none;border:1px solid var(--bd);color:var(--dim);cursor:pointer;padding:4px 8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap}
+.cr-eyedrop:hover,.cr-eyedrop.active{border-color:var(--ac);color:var(--ac);background:#1a0d07}
+.cr-mask-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cr-mask-row label{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;cursor:pointer;flex:1}
+.cr-mask-row input[type=checkbox]{accent-color:var(--ac);cursor:pointer}
 </style>
 </head>
 <body>
@@ -382,7 +433,7 @@ input[type=file]{display:none}
   <div class="bat-stage">
     <div class="bat-stage-head">
       <h1>Pick a tool<span class="dot">.</span></h1>
-      <div class="sub">Three browser-native utilities</div>
+      <div class="sub">Four browser-native utilities</div>
     </div>
 
     <div class="bat-tools">
@@ -402,6 +453,12 @@ input[type=file]{display:none}
       <div class="bat-tool" onclick="launchEditor('maskgen')">
         <div class="bt-name">Mask Generator</div>
         <div class="bt-desc">Compose black-and-white masks with layers and noise generators.</div>
+        <div class="bt-arrow">→</div>
+      </div>
+
+      <div class="bat-tool" onclick="launchEditor('colorreplace')">
+        <div class="bt-name">Color Replacer</div>
+        <div class="bt-desc">Swap any color range in a texture — HSL shift, LAB ΔE or GPU WebGL shader.</div>
         <div class="bt-arrow">→</div>
       </div>
 
@@ -705,6 +762,7 @@ function launchEditor(id) {
   }
   else if(id === 'bgremove') document.getElementById('bg-remover-app').style.display = 'flex';
   else if(id === 'maskgen')  document.getElementById('mask-gen-app').style.display = 'flex';
+  else if(id === 'colorreplace') { document.getElementById('cr-app').style.display = 'flex'; crInit(); }
   // Force a resize so the WebGL viewport picks up its real size now that it's visible
   requestAnimationFrame(() => {
     requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
@@ -714,6 +772,7 @@ function goHome() {
   document.getElementById('editor-app').style.display = 'none';
   document.getElementById('bg-remover-app').style.display = 'none';
   document.getElementById('mask-gen-app').style.display = 'none';
+  document.getElementById('cr-app').style.display = 'none';
   document.getElementById('main-menu').style.display = 'flex';
 }
 </script>
@@ -2699,6 +2758,484 @@ window.SessionStore = {
 
   // Init blank state
   recomposite();
+})();
+</script>
+
+
+
+<!-- ══ COLOR REPLACER ══ -->
+<div id="cr-app">
+  <div class="cr-header">
+    <button class="cr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="cr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Color Replacer</span>
+    </div>
+    <div class="cr-status" id="cr-status-bar">Load an image to get started</div>
+  </div>
+
+  <div class="cr-body">
+    <div class="cr-canvas-area" id="cr-drop-zone" style="position:relative">
+      <div class="cr-viewport" id="cr-viewport">
+        <label class="cr-drop" id="cr-drop" for="cr-file-in" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);cursor:pointer">
+          <span class="di">+</span>
+          Drop texture here
+          <div class="ds">PNG / JPG / WEBP — stays on your machine</div>
+        </label>
+        <div id="cr-canvas-wrap" style="display:none;position:absolute">
+          <canvas id="cr-canvas-main"></canvas>
+        </div>
+      </div>
+      <div class="cr-mask-panel" id="cr-mask-panel">
+        <div class="cr-mask-panel-head">Replacement mask — white = replaced, black = unchanged</div>
+        <div class="cr-mask-canvas-wrap">
+          <canvas id="cr-mask-overlay" style="max-width:100%;max-height:196px;display:block;image-rendering:pixelated"></canvas>
+        </div>
+      </div>
+      <input type="file" id="cr-file-in" accept="image/*" style="display:none">
+    </div>
+
+    <div class="cr-side">
+
+      <div class="cr-sec">
+        <h3>Algorithm</h3>
+        <div class="cr-algo-tabs">
+          <button class="cr-tab active" id="cr-tab-hsl" onclick="crSetMode('hsl')">HSL</button>
+          <button class="cr-tab" id="cr-tab-lab" onclick="crSetMode('lab')">LAB ΔE</button>
+          <button class="cr-tab" id="cr-tab-webgl" onclick="crSetMode('webgl')">WebGL</button>
+        </div>
+        <div class="cr-algo-desc" id="cr-algo-desc">Fast, predictable. Shifts Hue within ± tolerance.</div>
+      </div>
+
+      <div class="cr-sec">
+        <h3>From color</h3>
+        <div class="cr-color-row">
+          <label>Pick</label>
+          <div class="cr-swatch" id="cr-from-swatch" style="background:#e07020" onclick="document.getElementById('cr-from-cp').click()"></div>
+          <input type="color" id="cr-from-cp" value="#e07020" style="display:none" oninput="crFromColor=this.value;crUpdateSwatch('cr-from-swatch','cr-from-hex',this.value);if(crMode==='webgl')crWebGLRender();">
+          <span class="cr-hex" id="cr-from-hex">#e07020</span>
+          <button class="cr-eyedrop" id="cr-eyedrop-btn" onclick="crToggleEyedrop()">✦ pick</button>
+        </div>
+      </div>
+
+      <div class="cr-sec">
+        <h3>To color</h3>
+        <div class="cr-color-row">
+          <label>Pick</label>
+          <div class="cr-swatch" id="cr-to-swatch" style="background:#20a050" onclick="document.getElementById('cr-to-cp').click()"></div>
+          <input type="color" id="cr-to-cp" value="#20a050" style="display:none" oninput="crToColor=this.value;crUpdateSwatch('cr-to-swatch','cr-to-hex',this.value);if(crMode==='webgl')crWebGLRender();">
+          <span class="cr-hex" id="cr-to-hex">#20a050</span>
+        </div>
+      </div>
+
+      <div class="cr-sec">
+        <h3>Tolerance</h3>
+        <div class="srow">
+          <label id="cr-tol-label">Hue ±</label>
+          <input type="range" id="cr-tol" min="1" max="60" value="25" step="1" oninput="crTol=+this.value;document.getElementById('cr-tol-nv').value=this.value;if(crMode==='webgl')crWebGLRender();">
+          <input type="number" class="nv" id="cr-tol-nv" value="25" min="1" max="60" oninput="crTol=+this.value;document.getElementById('cr-tol').value=this.value;if(crMode==='webgl')crWebGLRender();">
+        </div>
+        <div class="srow">
+          <label>Feather</label>
+          <input type="range" id="cr-feat" min="0" max="40" value="10" step="1" oninput="crFeat=+this.value;document.getElementById('cr-feat-nv').value=this.value;if(crMode==='webgl')crWebGLRender();">
+          <input type="number" class="nv" id="cr-feat-nv" value="10" min="0" max="40" oninput="crFeat=+this.value;document.getElementById('cr-feat').value=this.value;if(crMode==='webgl')crWebGLRender();">
+        </div>
+        <div class="cr-mask-row">
+          <input type="checkbox" id="cr-show-mask" onchange="crToggleMask(this.checked)">
+          <label for="cr-show-mask">Show replacement mask (grayscale)</label>
+        </div>
+      </div>
+
+      <div class="cr-sec">
+        <button class="btn accent" onclick="crApply()">Apply replacement</button>
+        <button class="btn" onclick="crReset()">Reset image</button>
+        <button class="btn" onclick="crDownload()" id="cr-dl-btn" disabled>Download PNG</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Color Replacer globals ──
+var crMode='hsl', crFromColor='#e07020', crToColor='#20a050', crTol=25, crFeat=10;
+var crOrigData=null, crGl=null, crGlCanvas=null, crEyedrop=false;
+var crAlgoDescs={hsl:'Fast, predictable. Shifts Hue within ± tolerance.',lab:'Perceptual accuracy. Delta E threshold in CIELAB space.',webgl:'Real-time GPU shader — preview updates instantly as you adjust sliders.'};
+
+function crCvs(){return document.getElementById('cr-canvas-main');}
+function crMaskCvs(){return document.getElementById('cr-mask-overlay');}
+function crSetStatus(t){document.getElementById('cr-status-bar').innerHTML=t;}
+
+function crInit(){}
+
+function crSetMode(m){
+  crMode=m;
+  document.querySelectorAll('.cr-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cr-tab-'+m).classList.add('active');
+  document.getElementById('cr-algo-desc').textContent=crAlgoDescs[m];
+  document.getElementById('cr-tol-label').textContent=m==='lab'?'ΔE':'Hue ±';
+  var tolEl=document.getElementById('cr-tol');
+  var tolNv=document.getElementById('cr-tol-nv');
+  if(m==='lab'){tolEl.max=80;tolNv.max=80;}
+  else{tolEl.max=60;tolNv.max=60;}
+  if(m==='webgl'&&crOrigData) crInitWebGL();
+}
+
+function crUpdateSwatch(sid,hid,hex){
+  document.getElementById(sid).style.background=hex;
+  document.getElementById(hid).textContent=hex;
+}
+
+function crToggleEyedrop(){
+  crEyedrop=!crEyedrop;
+  document.getElementById('cr-eyedrop-btn').classList.toggle('active',crEyedrop);
+}
+
+function crRgbToHex(r,g,b){return'#'+[r,g,b].map(function(v){return v.toString(16).padStart(2,'0');}).join('');}
+function crHexToRgb(h){var n=parseInt(h.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255];}
+
+function crRgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b);
+  var h=0,s=0,l=(mx+mn)/2;
+  if(mx!==mn){var d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);
+    if(mx===r)h=((g-b)/d+(g<b?6:0))/6;
+    else if(mx===g)h=((b-r)/d+2)/6;
+    else h=((r-g)/d+4)/6;}
+  return[h*360,s,l];
+}
+function crHslToRgb(h,s,l){
+  h/=360;
+  if(s===0){var v=Math.round(l*255);return[v,v,v];}
+  var q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;
+  function hu(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<.5)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}
+  return[Math.round(hu(p,q,h+1/3)*255),Math.round(hu(p,q,h)*255),Math.round(hu(p,q,h-1/3)*255)];
+}
+function crHueDiff(a,b){var d=Math.abs(a-b);return d>180?360-d:d;}
+
+function crRgbToLab(r,g,b){
+  var R=r/255,G=g/255,B=b/255;
+  R=R>.04045?Math.pow((R+.055)/1.055,2.4):R/12.92;
+  G=G>.04045?Math.pow((G+.055)/1.055,2.4):G/12.92;
+  B=B>.04045?Math.pow((B+.055)/1.055,2.4):B/12.92;
+  var X=(R*.4124+G*.3576+B*.1805)/.95047;
+  var Y=(R*.2126+G*.7152+B*.0722);
+  var Z=(R*.0193+G*.1192+B*.9505)/1.08883;
+  function f(t){return t>.008856?Math.cbrt(t):(7.787*t+16/116);}
+  return[116*f(Y)-16,500*(f(X)-f(Y)),200*(f(Y)-f(Z))];
+}
+function crDeltaE(a,b){return Math.sqrt((a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2);}
+
+function crApplyHSL(data,fc,tc,tol,feat){
+  var fr=crRgbToHsl.apply(null,crHexToRgb(fc));
+  var fh=fr[0],fs=fr[1];
+  var tr=crRgbToHsl.apply(null,crHexToRgb(tc));
+  var th=tr[0],ts=tr[1];
+  var out=new Uint8ClampedArray(data);
+  var maskOut=new Uint8ClampedArray(data.length);
+  for(var i=0;i<data.length;i+=4){
+    var hsl=crRgbToHsl(data[i],data[i+1],data[i+2]);
+    var h=hsl[0],s=hsl[1],l=hsl[2];
+    var diff=crHueDiff(h,fh);
+    var alpha=0;
+    if(diff<=tol)alpha=1;
+    else if(feat>0&&diff<=tol+feat)alpha=1-(diff-tol)/feat;
+    if(alpha>0){
+      var delta=((th-fh+540)%360);
+      var nh=(h+delta)%360;
+      var nsat=Math.max(0,Math.min(1,s+(ts-fs)*alpha));
+      var rgb=crHslToRgb(nh,nsat,l);
+      out[i]=Math.round(data[i]+(rgb[0]-data[i])*alpha);
+      out[i+1]=Math.round(data[i+1]+(rgb[1]-data[i+1])*alpha);
+      out[i+2]=Math.round(data[i+2]+(rgb[2]-data[i+2])*alpha);
+      var g255=Math.round(alpha*255);
+      maskOut[i]=g255;maskOut[i+1]=g255;maskOut[i+2]=g255;maskOut[i+3]=220;
+    }
+  }
+  return{out:out,maskOut:maskOut};
+}
+
+function crLabToRgb(L,a,b){
+  // LAB -> XYZ
+  var fy=(L+16)/116, fx=a/500+fy, fz=fy-b/200;
+  var x=fx*fx*fx>.008856?fx*fx*fx:(fx-16/116)/7.787;
+  var y=fy*fy*fy>.008856?fy*fy*fy:(fy-16/116)/7.787;
+  var z=fz*fz*fz>.008856?fz*fz*fz:(fz-16/116)/7.787;
+  x*=.95047; y*=1.0; z*=1.08883;
+  // XYZ -> linear RGB
+  var r= x* 3.2406+y*-1.5372+z*-0.4986;
+  var g= x*-0.9689+y* 1.8758+z* 0.0415;
+  var bv=x* 0.0557+y*-0.2040+z* 1.0570;
+  // gamma
+  function gc(v){return v>.0031308?1.055*Math.pow(v,1/2.4)-.055:12.92*v;}
+  r=gc(r);g=gc(g);bv=gc(bv);
+  return[Math.max(0,Math.min(255,Math.round(r*255))),
+         Math.max(0,Math.min(255,Math.round(g*255))),
+         Math.max(0,Math.min(255,Math.round(bv*255)))];
+}
+
+function crApplyLAB(data,fc,tc,tol,feat){
+  var frgb=crHexToRgb(fc),trgb=crHexToRgb(tc);
+  var flab=crRgbToLab.apply(null,frgb);
+  var tlab=crRgbToLab.apply(null,trgb);
+  // delta in LAB space
+  var dL=tlab[0]-flab[0], da=tlab[1]-flab[1], db=tlab[2]-flab[2];
+  var out=new Uint8ClampedArray(data);
+  var maskOut=new Uint8ClampedArray(data.length);
+  for(var i=0;i<data.length;i+=4){
+    var plab=crRgbToLab(data[i],data[i+1],data[i+2]);
+    var de=crDeltaE(plab,flab);
+    var alpha=0;
+    if(de<=tol)alpha=1;
+    else if(feat>0&&de<=tol+feat)alpha=1-(de-tol)/feat;
+    if(alpha>0){
+      // shift LAB by delta, blended by alpha
+      var nL=plab[0]+dL*alpha;
+      var na=plab[1]+da*alpha;
+      var nb=plab[2]+db*alpha;
+      var rgb=crLabToRgb(nL,na,nb);
+      out[i]=rgb[0];
+      out[i+1]=rgb[1];
+      out[i+2]=rgb[2];
+      var g255=Math.round(alpha*255);
+      maskOut[i]=g255;maskOut[i+1]=g255;maskOut[i+2]=g255;maskOut[i+3]=220;
+    }
+  }
+  return{out:out,maskOut:maskOut};
+}
+
+function crInitWebGL(){
+  if(!crOrigData)return;
+  if(!crGlCanvas)crGlCanvas=document.createElement('canvas');
+  var c=crCvs();
+  crGlCanvas.width=c.width;crGlCanvas.height=c.height;
+  crGl=crGlCanvas.getContext('webgl');
+  if(!crGl){crSetStatus('<b style="color:var(--ac)">WebGL not supported</b>');return;}
+  var gl=crGl;
+  var vs='attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0,1);}';
+  var fs='precision mediump float;uniform sampler2D tex;uniform vec3 fc;uniform vec3 tc;uniform float tol;uniform float feat;varying vec2 uv;vec3 rgb2hsl(vec3 c){float mx=max(c.r,max(c.g,c.b)),mn=min(c.r,min(c.g,c.b));float h=0.,s=0.,l=(mx+mn)*.5;if(mx!=mn){float d=mx-mn;s=l>.5?d/(2.-mx-mn):d/(mx+mn);if(mx==c.r)h=mod((c.g-c.b)/d+(c.g<c.b?6.:0.),6.)/6.;else if(mx==c.g)h=((c.b-c.r)/d+2.)/6.;else h=((c.r-c.g)/d+4.)/6.;}return vec3(h*360.,s,l);}float hq(float p,float q,float t){if(t<0.)t+=1.;if(t>1.)t-=1.;if(t<1./6.)return p+(q-p)*6.*t;if(t<.5)return q;if(t<2./3.)return p+(q-p)*(2./3.-t)*6.;return p;}vec3 hsl2rgb(vec3 hsl){float h=hsl.x/360.,s=hsl.y,l=hsl.z;if(s==0.)return vec3(l);float q=l<.5?l*(1.+s):l+s-l*s,p=2.*l-q;return vec3(hq(p,q,h+1./3.),hq(p,q,h),hq(p,q,h-1./3.));}float hueDiff(float a,float b){float d=abs(a-b);return d>180.?360.-d:d;}void main(){vec4 px=texture2D(tex,vec2(uv.x,1.-uv.y));vec3 hsl=rgb2hsl(px.rgb);vec3 fhsl=rgb2hsl(fc);vec3 thsl=rgb2hsl(tc);float diff=hueDiff(hsl.x,fhsl.x);float alpha=diff<=tol?1.:diff<=tol+feat?1.-(diff-tol)/max(feat,0.001):0.;if(alpha>0.){float delta=mod(thsl.x-fhsl.x+540.,360.);vec3 nhsl=vec3(mod(hsl.x+delta,360.),clamp(hsl.y+(thsl.y-fhsl.y)*alpha,0.,1.),hsl.z);vec3 nc=hsl2rgb(nhsl);px.rgb=mix(px.rgb,nc,alpha);}gl_FragColor=px;}';
+  function mkShader(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  var prog=gl.createProgram();
+  gl.attachShader(prog,mkShader(gl.VERTEX_SHADER,vs));
+  gl.attachShader(prog,mkShader(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var pos=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+  var tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
+  gl._prog=prog;
+  crWebGLRender();
+}
+
+function crWebGLRender(){
+  if(!crGl||!crGl._prog)return;
+  var gl=crGl,prog=crGl._prog;
+  function toF(h){var r=crHexToRgb(h);return[r[0]/255,r[1]/255,r[2]/255];}
+  gl.uniform3fv(gl.getUniformLocation(prog,'fc'),toF(crFromColor));
+  gl.uniform3fv(gl.getUniformLocation(prog,'tc'),toF(crToColor));
+  gl.uniform1f(gl.getUniformLocation(prog,'tol'),crTol);
+  gl.uniform1f(gl.getUniformLocation(prog,'feat'),crFeat);
+  gl.viewport(0,0,crGlCanvas.width,crGlCanvas.height);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  var c=crCvs();
+  c.getContext('2d').clearRect(0,0,c.width,c.height);
+  c.getContext('2d').drawImage(crGlCanvas,0,0);
+}
+
+function crApply(){
+  if(!crOrigData){crSetStatus('<b>Load image first</b>');return;}
+  if(crMode==='webgl'){crInitWebGL();crSetStatus('<b>WebGL</b> — real-time GPU render active');return;}
+  var t0=performance.now();
+  var c=crCvs();
+  var result=crMode==='hsl'?crApplyHSL(crOrigData.data,crFromColor,crToColor,crTol,crFeat):crApplyLAB(crOrigData.data,crFromColor,crToColor,crTol,crFeat);
+  c.getContext('2d').putImageData(new ImageData(result.out,c.width,c.height),0,0);
+  if(document.getElementById('cr-show-mask').checked){
+    var mc=crMaskCvs();
+    mc.getContext('2d').putImageData(new ImageData(result.maskOut,c.width,c.height),0,0);
+  }
+  var ms=(performance.now()-t0).toFixed(1);
+  crSetStatus('<b>'+crMode.toUpperCase()+'</b> · '+c.width+'×'+c.height+'px · '+ms+'ms');
+  document.getElementById('cr-dl-btn').disabled=false;
+  if(document.getElementById('cr-show-mask').checked) crToggleMask(true);
+}
+
+function crToggleMask(show){
+  var panel=document.getElementById('cr-mask-panel');
+  if(!show){panel.classList.remove('visible');return;}
+  panel.classList.add('visible');
+  if(crOrigData){
+    var c=crCvs();
+    var result=crMode==='hsl'?crApplyHSL(crOrigData.data,crFromColor,crToColor,crTol,crFeat):crApplyLAB(crOrigData.data,crFromColor,crToColor,crTol,crFeat);
+    var mc=crMaskCvs();
+    mc.width=c.width;mc.height=c.height;
+    mc.getContext('2d').putImageData(new ImageData(result.maskOut,c.width,c.height),0,0);
+  }
+}
+
+function crReset(){
+  if(!crOrigData)return;
+  var c=crCvs();
+  c.getContext('2d').putImageData(crOrigData,0,0);
+  crMaskCvs().getContext('2d').clearRect(0,0,c.width,c.height);
+  document.getElementById('cr-mask-panel').classList.remove('visible');
+  document.getElementById('cr-show-mask').checked=false;
+  crGl=null;crGlCanvas=null;
+  crPanX=0;crPanY=0;crZoom=1;crApplyTransform();
+  crSetStatus('Reset — showing original');
+}
+
+function crDownload(){
+  if(!crOrigData)return;
+  var a=document.createElement('a');a.download='color-replaced.png';a.href=crCvs().toDataURL();a.click();
+}
+
+function crLoadImage(file){
+  var img=new Image();
+  img.onload=function(){
+    var c=crCvs();
+    var mc=crMaskCvs();
+    c.width=img.naturalWidth;c.height=img.naturalHeight;
+    mc.width=img.naturalWidth;mc.height=img.naturalHeight;
+    c.getContext('2d').drawImage(img,0,0);
+    crOrigData=c.getContext('2d').getImageData(0,0,c.width,c.height);
+    document.getElementById('cr-drop').style.display='none';
+    document.getElementById('cr-canvas-wrap').style.display='inline-block';
+    document.getElementById('cr-dl-btn').disabled=false;
+    crGl=null;crGlCanvas=null;
+    crPanX=0;crPanY=0;crZoom=1;
+    requestAnimationFrame(function(){requestAnimationFrame(crApplyTransform);});
+    crSetStatus('<b>'+file.name+'</b> · '+c.width+'×'+c.height+'px · scroll = zoom · RMB = pan · dblclick = reset');
+    if(crMode==='webgl') crInitWebGL();
+  };
+  img.src=URL.createObjectURL(file);
+}
+
+document.getElementById('cr-file-in').addEventListener('change',function(e){
+  if(e.target.files[0]) crLoadImage(e.target.files[0]);
+});
+
+
+// ── Pan & Zoom ──
+var crPanX=0, crPanY=0, crZoom=1;
+var crIsPanning=false, crLastPanX=0, crLastPanY=0;
+
+function crApplyTransform(){
+  var wrap=document.getElementById('cr-canvas-wrap');
+  if(!wrap||wrap.style.display==='none') return;
+  var vp=document.getElementById('cr-viewport');
+  var vpW=vp.clientWidth, vpH=vp.clientHeight;
+  var cW=wrap.offsetWidth, cH=wrap.offsetHeight;
+  // center offset so image is in the middle of viewport
+  var cx=Math.round((vpW-cW)/2);
+  var cy=Math.round((vpH-cH)/2);
+  wrap.style.left=cx+'px';
+  wrap.style.top=cy+'px';
+  wrap.style.transformOrigin='center center';
+  wrap.style.transform='translate('+crPanX+'px,'+crPanY+'px) scale('+crZoom+')';
+}
+
+(function(){
+  var vp=document.getElementById('cr-viewport');
+  if(!vp) return;
+
+  vp.addEventListener('wheel',function(e){
+    e.preventDefault();
+    var rect=vp.getBoundingClientRect();
+    var wrap=document.getElementById('cr-canvas-wrap');
+    if(!wrap||wrap.style.display==='none') return;
+    // mouse position relative to wrap center
+    var wRect=wrap.getBoundingClientRect();
+    var wCx=wRect.left+wRect.width/2;
+    var wCy=wRect.top+wRect.height/2;
+    var mx=e.clientX-wCx;
+    var my=e.clientY-wCy;
+    var factor=e.deltaY<0?1.12:1/1.12;
+    var newZoom=Math.max(0.1,Math.min(30,crZoom*factor));
+    var scale=newZoom/crZoom;
+    crPanX=crPanX+mx*(1-scale);
+    crPanY=crPanY+my*(1-scale);
+    crZoom=newZoom;
+    crApplyTransform();
+  },{passive:false});
+
+  vp.addEventListener('mousedown',function(e){
+    if(e.button===2){
+      e.preventDefault();
+      crIsPanning=true;
+      crLastPanX=e.clientX;
+      crLastPanY=e.clientY;
+      vp.style.cursor='grabbing';
+    }
+  });
+
+  window.addEventListener('mousemove',function(e){
+    if(!crIsPanning)return;
+    crPanX+=e.clientX-crLastPanX;
+    crPanY+=e.clientY-crLastPanY;
+    crLastPanX=e.clientX;
+    crLastPanY=e.clientY;
+    crApplyTransform();
+  });
+
+  window.addEventListener('mouseup',function(e){
+    if(e.button===2&&crIsPanning){
+      crIsPanning=false;
+      vp.style.cursor='';
+    }
+  });
+
+  vp.addEventListener('contextmenu',function(e){e.preventDefault();});
+
+  vp.addEventListener('dblclick',function(e){
+    if(e.button===0&&!crEyedrop){
+      crPanX=0;crPanY=0;crZoom=1;crApplyTransform();
+    }
+  });
+})();
+
+(function(){
+  var dz=document.getElementById('cr-drop-zone');
+  dz.addEventListener('dragover',function(e){e.preventDefault();document.getElementById('cr-drop').classList.add('over');});
+  dz.addEventListener('dragleave',function(){document.getElementById('cr-drop').classList.remove('over');});
+  dz.addEventListener('drop',function(e){
+    e.preventDefault();
+    document.getElementById('cr-drop').classList.remove('over');
+    var f=e.dataTransfer.files[0];
+    if(f&&f.type.startsWith('image/'))crLoadImage(f);
+  });
+  document.getElementById('cr-canvas-main').addEventListener('click',function(e){
+    if(!crEyedrop||!crOrigData)return;
+    var c=crCvs();
+    // account for pan/zoom: pixel coords = (mouse - pan) / zoom, then scale to canvas native size
+    var vp=document.getElementById('cr-viewport');
+    var vpRect=vp.getBoundingClientRect();
+    var mx=e.clientX-vpRect.left;
+    var my=e.clientY-vpRect.top;
+    var wrap=document.getElementById('cr-canvas-wrap');
+    var wRect=wrap.getBoundingClientRect();
+    // position within the actual canvas element (in screen px)
+    var cx=e.clientX-wRect.left;
+    var cy=e.clientY-wRect.top;
+    // scale to canvas native pixels
+    var sx=Math.round(cx*c.width/wRect.width);
+    var sy=Math.round(cy*c.height/wRect.height);
+    sx=Math.max(0,Math.min(c.width-1,sx));
+    sy=Math.max(0,Math.min(c.height-1,sy));
+    var idx=(sy*c.width+sx)*4;
+    var d=crOrigData.data;
+    var hex=crRgbToHex(d[idx],d[idx+1],d[idx+2]);
+    crFromColor=hex;
+    document.getElementById('cr-from-cp').value=hex;
+    crUpdateSwatch('cr-from-swatch','cr-from-hex',hex);
+    crEyedrop=false;
+    document.getElementById('cr-eyedrop-btn').classList.remove('active');
+    if(crMode==='webgl') crWebGLRender();
+  });
 })();
 </script>
 
