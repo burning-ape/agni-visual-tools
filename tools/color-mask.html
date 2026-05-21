@@ -1,0 +1,101 @@
+<div id="cm-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Color Masking</span>
+    </div>
+  </div>
+
+  <div class="bgr-body">
+    <div class="cm-canvas-area" id="cmCanvasArea">
+      <div class="bgr-drop" id="cmDrop">
+        <span class="di">DROP</span>
+        Texture
+        <div class="ds">PNG · JPG · WebP — isolate a colour into a B&amp;W mask</div>
+      </div>
+      <input type="file" id="cmFileIn" accept="image/*" style="display:none">
+
+      <div class="cm-split" id="cmSplit" style="display:none">
+        <div class="cm-view">
+          <div class="cm-view-label">Source</div>
+          <canvas id="cmSrcCanvas"></canvas>
+        </div>
+        <div class="cm-view">
+          <div class="cm-view-label">Mask</div>
+          <canvas id="cmOutCanvas"></canvas>
+        </div>
+      </div>
+      <div class="at-drop-overlay" id="cmDropOverlay">drop to replace</div>
+    </div>
+
+    <div class="bgr-side">
+      <div>
+        <h3>Target colour</h3>
+        <div class="cm-color-row">
+          <input type="color" id="cmColor" value="#e02020">
+          <button class="cm-eyedrop" id="cmEyedrop" type="button" title="Pick from source">⊙</button>
+          <span class="ng-hint" id="cmEyeHint">click swatch or eyedropper</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>Algorithm</h3>
+        <div class="bgr-toggle-row" id="cmMode">
+          <button class="on" data-m="hsl">HSL</button>
+          <button data-m="lab">LAB ΔE</button>
+        </div>
+        <div class="ng-hint" id="cmModeHint">HSL: fast, hue-based. Best for vivid distinct colours.</div>
+      </div>
+
+      <div>
+        <h3><span id="cmTolLabel">Hue tolerance</span> <span class="cm-tol-tag" id="cmTolUnit">°</span></h3>
+        <div class="ng-slider-row">
+          <input type="range" id="cmTol" min="0" max="180" step="1" value="20">
+          <span class="ng-val" id="cmTolVal">20</span>
+        </div>
+        <div class="ng-hint">How far from the target colour still counts as "in".</div>
+      </div>
+
+      <div>
+        <h3>Edge softness</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="cmFeather" min="0" max="60" step="1" value="0">
+          <span class="ng-val" id="cmFeatherVal">0</span>
+        </div>
+        <div class="ng-hint">Tolerance band where the mask fades from white to black. 0 = hard edge.</div>
+      </div>
+
+      <div>
+        <h3>Edge blur (px)</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="cmBlur" min="0" max="12" step="1" value="0">
+          <span class="ng-val" id="cmBlurVal">0</span>
+        </div>
+        <div class="ng-hint">Post-blur the mask in pixel space. Stacks with edge softness.</div>
+      </div>
+
+      <div>
+        <h3>White threshold</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="cmThresh" min="0" max="100" step="1" value="50">
+          <span class="ng-val" id="cmThreshVal">50%</span>
+        </div>
+        <div class="ng-hint">Cutoff that promotes near-white to full white. Black stays absolute.</div>
+      </div>
+
+      <div>
+        <h3>Options</h3>
+        <label class="ng-check"><input type="checkbox" id="cmInvert"> invert (black on white)</label>
+      </div>
+
+      <div>
+        <h3>Output</h3>
+        <button class="btn accent" id="cmDownload" disabled>Download Mask PNG</button>
+        <button class="btn" id="cmSendMaskGen" disabled>Send to Mask Generator</button>
+        <button class="btn" id="cmReset" disabled>Clear / Load Another</button>
+      </div>
+    </div>
+  </div>
+</div>

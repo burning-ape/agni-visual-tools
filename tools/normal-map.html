@@ -1,0 +1,75 @@
+<div id="ng-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Normal Map</span>
+    </div>
+  </div>
+
+  <div class="bgr-body">
+    <div class="ng-canvas-area" id="ngCanvasArea">
+      <div class="bgr-drop" id="ngDrop">
+        <span class="di">DROP</span>
+        Heightmap or diffuse
+        <div class="ds">PNG · JPG · WebP — generated locally, GPU shader</div>
+      </div>
+      <input type="file" id="ngFileIn" accept="image/*" style="display:none">
+      <div class="ng-split" id="ngSplit" style="display:none">
+        <div class="ng-view">
+          <div class="ng-view-label">Source</div>
+          <canvas id="ngSrcCanvas"></canvas>
+        </div>
+        <div class="ng-view">
+          <div class="ng-view-label">Normal</div>
+          <canvas id="ngOutCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="bgr-side">
+      <div>
+        <h3>Source mode</h3>
+        <div class="bgr-toggle-row" id="ngSrcMode">
+          <button class="on" data-src="auto">Auto</button>
+          <button data-src="height">Height</button>
+          <button data-src="diffuse">Diffuse</button>
+        </div>
+        <div class="ng-hint">Auto: brightness → height. Height: grey = mid. Diffuse: extracts detail from RGB.</div>
+      </div>
+
+      <div>
+        <h3>Strength</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="ngStrength" min="0.1" max="10" step="0.1" value="2.0">
+          <span class="ng-val" id="ngStrengthVal">2.0</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>Detail blur</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="ngBlur" min="0" max="8" step="1" value="0">
+          <span class="ng-val" id="ngBlurVal">0</span>
+        </div>
+        <div class="ng-hint">Pre-blur to suppress noise.</div>
+      </div>
+
+      <div>
+        <h3>Channel orientation</h3>
+        <div class="ng-grid-2">
+          <label class="ng-check"><input type="checkbox" id="ngInvX"> Invert X</label>
+          <label class="ng-check"><input type="checkbox" id="ngInvY"> Invert Y (OpenGL ↔ DirectX)</label>
+        </div>
+        <div class="ng-hint">Default = OpenGL (+Y up). Flip Y for DirectX / Unreal.</div>
+      </div>
+
+      <div>
+        <h3>Output</h3>
+        <button class="btn accent" id="ngDownload" disabled>Download Normal PNG</button>
+        <button class="btn" id="ngReset" disabled>Clear / Load Another</button>
+      </div>
+    </div>
+  </div>
+</div>

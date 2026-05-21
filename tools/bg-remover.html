@@ -1,0 +1,61 @@
+<div id="bg-remover-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Background Remover</span>
+    </div>
+  </div>
+
+  <div class="bgr-body">
+    <div class="bgr-canvas-area" id="bgrCanvasArea">
+      <div class="bgr-drop" id="bgrDrop">
+        <span class="di">DROP</span>
+        Image goes here
+        <div class="ds">PNG · JPG · WebP — runs locally in your browser</div>
+      </div>
+      <input type="file" id="bgrFileIn" accept="image/*" style="display:none">
+      <div class="bgr-img-wrap" id="bgrImgWrap" style="display:none">
+        <img id="bgrImg">
+      </div>
+    </div>
+
+    <div class="bgr-side">
+      <div>
+        <h3>Process</h3>
+        <button class="btn" id="bgrRunBtn" disabled>Remove Background</button>
+        <div class="bgr-progress" id="bgrProgress"><div></div></div>
+        <div id="bgrProgText" style="font-size:11px;color:var(--tl);margin-top:6px;display:none">In progress...</div>
+      </div>
+
+      <div>
+        <h3>View</h3>
+        <div class="bgr-toggle-row" id="bgrViewToggle">
+          <button class="on" data-view="result">Result</button>
+          <button data-view="original">Original</button>
+        </div>
+      </div>
+
+      <div>
+        <h3>Background</h3>
+        <div class="bgr-toggle-row" id="bgrBgToggle">
+          <button class="on" data-bg="transparent">Transparent</button>
+          <button data-bg="color">Color</button>
+        </div>
+        <div class="bgr-bg-color" id="bgrBgColorRow" style="display:none;margin-top:8px">
+          <input type="color" id="bgrBgColor" value="#ffffff">
+          <span style="font-size:11px;color:var(--dim)">solid color</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>Export</h3>
+        <button class="btn accent" id="bgrExportBtn" disabled>Download PNG</button>
+        <button class="btn" id="bgrResetBtn" disabled>Clear / Load Another</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

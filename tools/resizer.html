@@ -1,0 +1,68 @@
+<div id="rs-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Resizer</span>
+    </div>
+  </div>
+
+  <div class="bgr-body">
+    <div class="rs-list-area" id="rsListArea">
+      <div class="bgr-drop" id="rsDrop">
+        <span class="di">DROP</span>
+        Images (multiple OK)
+        <div class="ds">PNG · JPG · WebP — batch resize, runs locally</div>
+      </div>
+      <input type="file" id="rsFileIn" accept="image/*" multiple style="display:none">
+      <div class="rs-list" id="rsList" style="display:none"></div>
+    </div>
+
+    <div class="bgr-side">
+      <div>
+        <h3>Mode</h3>
+        <div class="bgr-toggle-row" id="rsMode">
+          <button class="on" data-m="longest">Longest side</button>
+          <button data-m="exact">Exact W×H</button>
+          <button data-m="scale">Scale %</button>
+          <button data-m="pot">Power-of-2</button>
+        </div>
+      </div>
+
+      <div id="rsModeOpts">
+        <!-- populated by JS -->
+      </div>
+
+      <div>
+        <h3>Filter</h3>
+        <select id="rsFilter" class="sm-select">
+          <option value="lanczos" selected>Lanczos (sharp)</option>
+          <option value="mitchell">Mitchell (balanced)</option>
+          <option value="bilinear">Bilinear (browser)</option>
+          <option value="nearest">Nearest (pixel art)</option>
+        </select>
+      </div>
+
+      <div>
+        <h3>Output format</h3>
+        <select id="rsFormat" class="sm-select">
+          <option value="png" selected>PNG (lossless)</option>
+          <option value="jpeg">JPEG (smaller)</option>
+          <option value="webp">WebP</option>
+        </select>
+        <div class="ng-slider-row" id="rsQualityRow" style="display:none">
+          <input type="range" id="rsQuality" min="0.1" max="1" step="0.05" value="0.9">
+          <span class="ng-val" id="rsQualityVal">90%</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>Process</h3>
+        <button class="btn accent" id="rsRun" disabled>Resize &amp; Download All</button>
+        <button class="btn" id="rsClear" disabled>Clear list</button>
+        <div class="ng-hint" id="rsStatus">Drop images to begin.</div>
+      </div>
+    </div>
+  </div>
+</div>

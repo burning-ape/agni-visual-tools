@@ -1,0 +1,63 @@
+<div id="uv-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ UV Checker</span>
+    </div>
+    <div class="uv-hint">LMB rotate · RMB pan · Scroll zoom</div>
+  </div>
+
+  <div class="uv-body">
+    <div class="uv-side">
+      <div>
+        <h3>Model</h3>
+        <button class="btn" id="uvLoadBtn">Load FBX</button>
+        <div class="ng-hint" id="uvModelInfo">No model loaded.</div>
+      </div>
+      <div>
+        <h3>Checker pattern</h3>
+        <select id="uvPattern" class="sm-select">
+          <option value="checker" selected>Checker (colored)</option>
+          <option value="grid">Grid (numbered)</option>
+          <option value="density">Density gradient</option>
+          <option value="stripes-h">Stripes horizontal</option>
+          <option value="stripes-v">Stripes vertical</option>
+        </select>
+      </div>
+      <div>
+        <h3>Tile density</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="uvTiles" min="1" max="64" step="1" value="8">
+          <span class="ng-val" id="uvTilesVal">8</span>
+        </div>
+      </div>
+      <div>
+        <h3>Texture resolution</h3>
+        <select id="uvRes" class="sm-select">
+          <option value="512">512</option>
+          <option value="1024" selected>1024</option>
+          <option value="2048">2048</option>
+        </select>
+      </div>
+      <div>
+        <h3>Display</h3>
+        <label class="ng-check"><input type="checkbox" id="uvWire"> show wireframe</label>
+        <label class="ng-check"><input type="checkbox" id="uvFlatten"> flatten to UV space (2D view)</label>
+      </div>
+      <div>
+        <h3>Export</h3>
+        <button class="btn" id="uvDownloadPattern">Download Checker PNG</button>
+        <div class="ng-hint">Save the generated checker as a regular texture.</div>
+      </div>
+    </div>
+
+    <div class="uv-viewport" id="uvViewport">
+      <div class="uv-empty" id="uvEmpty">Load an FBX to inspect its UVs</div>
+      <div class="uv-status" id="uvStatus"></div>
+    </div>
+  </div>
+
+  <input type="file" id="uvFileIn" accept=".fbx" style="display:none">
+</div>

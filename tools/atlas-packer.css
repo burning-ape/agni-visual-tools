@@ -1,0 +1,47 @@
+/* ── Atlas Packer ── */
+.at-canvas-area{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;background:#000;min-width:0;position:relative}
+.at-preview-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+#atPreview{
+  max-width:100%;max-height:calc(100% - 70px);
+  background:repeating-conic-gradient(#1a1a1a 0% 25%, #0d0d0d 0% 50%) 50% / 16px 16px;
+  image-rendering:pixelated;display:block;
+}
+.at-status{font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+/* "+ add more sprites" button shown under the preview so the user can
+   keep adding files after the dropzone is replaced by the canvas */
+.at-add-more{
+  border:1px dashed var(--bd);background:transparent;
+  color:var(--dim);font-family:var(--mono);font-size:11px;
+  text-transform:uppercase;letter-spacing:0.12em;
+  padding:8px 18px;cursor:pointer;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.at-add-more:hover{border-color:var(--ac);color:var(--ac);background:rgba(255,90,31,0.05)}
+
+/* full-area drop overlay — appears only while user drags files in */
+.at-drop-overlay{
+  position:absolute;inset:8px;
+  display:none;align-items:center;justify-content:center;
+  border:2px dashed var(--ac);background:rgba(255,90,31,0.08);
+  color:var(--ac);font-family:var(--mono);font-size:13px;
+  text-transform:uppercase;letter-spacing:0.18em;
+  pointer-events:none;z-index:10;
+}
+.at-canvas-area.dragover .at-drop-overlay{display:flex}
+
+.at-sprite-list{
+  background:var(--s2);border:1px solid var(--bd);
+  max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:1px;
+  font-family:var(--mono);font-size:10px;color:var(--dim);
+}
+.at-sprite-list .at-empty{padding:12px;text-align:center}
+.at-sp-row{
+  display:grid;grid-template-columns:24px 1fr auto 20px;gap:8px;align-items:center;
+  background:var(--s1);padding:6px 8px;
+}
+.at-sp-row img{width:24px;height:24px;object-fit:contain;background:#000}
+.at-sp-row .nm{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+.at-sp-row .sz{color:var(--dim);font-size:10px}
+.at-sp-row .rm{background:none;border:1px solid var(--bd);color:var(--dim);width:20px;height:20px;cursor:pointer;font-size:9px}
+.at-sp-row .rm:hover{color:var(--ac);border-color:var(--ac)}

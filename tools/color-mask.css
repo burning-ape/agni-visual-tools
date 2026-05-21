@@ -1,0 +1,29 @@
+/* ── Color Masking ── */
+.cm-canvas-area{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;background:#000;min-width:0;position:relative}
+.cm-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd);border:1px solid var(--bd);width:100%;height:100%;max-width:1200px}
+.cm-view{background:#0a0a0a;display:flex;flex-direction:column;min-width:0;min-height:0;position:relative}
+.cm-view-label{position:absolute;top:8px;left:10px;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.16em;z-index:2;pointer-events:none}
+.cm-view canvas{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+
+.cm-color-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cm-color-row input[type=color]{
+  width:36px;height:36px;border:1px solid var(--bd);background:none;padding:2px;cursor:pointer;
+}
+.cm-eyedrop{
+  width:36px;height:36px;background:var(--s2);border:1px solid var(--bd);
+  color:var(--ink);cursor:pointer;font-size:18px;line-height:1;
+}
+.cm-eyedrop:hover{border-color:var(--ac);color:var(--ac)}
+.cm-eyedrop.on{border-color:var(--ac);color:var(--ac);background:rgba(255,90,31,0.1)}
+
+.cm-tol-tag{
+  font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:0.1em;
+  border:1px solid var(--bd);padding:1px 5px;margin-left:6px;text-transform:none;
+}
+
+/* eyedrop cursor on the source canvas */
+.cm-view canvas.eyedropping{cursor:crosshair}
+
+@media (max-width:760px){
+  .cm-split{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+}

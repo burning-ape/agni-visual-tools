@@ -1,0 +1,66 @@
+<div id="sm-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Seamless Maker</span>
+    </div>
+  </div>
+
+  <div class="bgr-body">
+    <div class="sm-canvas-area" id="smCanvasArea">
+      <div class="bgr-drop" id="smDrop">
+        <span class="di">DROP</span>
+        Texture
+        <div class="ds">Photo or texture · we'll make it tile</div>
+      </div>
+      <input type="file" id="smFileIn" accept="image/*" style="display:none">
+      <div class="sm-preview-wrap" id="smPreview" style="display:none">
+        <canvas id="smCanvas"></canvas>
+        <div class="sm-tile-toggle">
+          <button class="on" id="smView1x">1×1</button>
+          <button id="smView2x">2×2</button>
+          <button id="smView3x">3×3</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bgr-side">
+      <div>
+        <h3>Method</h3>
+        <div class="bgr-toggle-row" id="smMethod">
+          <button class="on" data-m="offset">Offset blend</button>
+          <button data-m="mirror">Mirror tile</button>
+        </div>
+        <div class="ng-hint" id="smMethodHint">Offset wraps the image and feathers the seam. Best for organic textures.</div>
+      </div>
+
+      <div id="smOffsetGroup">
+        <h3>Feather width</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="smFeather" min="0" max="100" step="1" value="30">
+          <span class="ng-val" id="smFeatherVal">30%</span>
+        </div>
+        <div class="ng-hint">Wider = smoother seam, but blurrier overlap.</div>
+      </div>
+
+      <div>
+        <h3>Output size</h3>
+        <select id="smSize" class="sm-select">
+          <option value="0">Original</option>
+          <option value="256">256 × 256</option>
+          <option value="512">512 × 512</option>
+          <option value="1024">1024 × 1024</option>
+          <option value="2048">2048 × 2048</option>
+        </select>
+      </div>
+
+      <div>
+        <h3>Output</h3>
+        <button class="btn accent" id="smDownload" disabled>Download Tile PNG</button>
+        <button class="btn" id="smReset" disabled>Clear / Load Another</button>
+      </div>
+    </div>
+  </div>
+</div>

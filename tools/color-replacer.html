@@ -1,0 +1,92 @@
+<div id="cr-app" class="tool-pane">
+  <div class="cr-header">
+    <button class="cr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="cr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Color Replacer</span>
+    </div>
+    <div class="cr-status" id="cr-status-bar">Load an image to get started</div>
+  </div>
+
+  <div class="cr-body">
+    <div class="cr-canvas-area" id="cr-drop-zone" style="position:relative">
+      <div class="cr-viewport" id="cr-viewport">
+        <label class="cr-drop" id="cr-drop" for="cr-file-in" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);cursor:pointer">
+          <span class="di">+</span>
+          Drop texture here
+          <div class="ds">PNG / JPG / WEBP — stays on your machine</div>
+        </label>
+        <div id="cr-canvas-wrap" style="display:none;position:absolute">
+          <canvas id="cr-canvas-main"></canvas>
+        </div>
+      </div>
+      <div class="cr-mask-panel" id="cr-mask-panel">
+        <div class="cr-mask-panel-head">Replacement mask — white = replaced, black = unchanged</div>
+        <div class="cr-mask-canvas-wrap">
+          <canvas id="cr-mask-overlay" style="max-width:100%;max-height:196px;display:block;image-rendering:pixelated"></canvas>
+        </div>
+      </div>
+      <input type="file" id="cr-file-in" accept="image/*" style="display:none">
+    </div>
+
+    <div class="cr-side">
+
+      <div class="cr-sec">
+        <h3>Algorithm</h3>
+        <div class="cr-algo-tabs">
+          <button class="cr-tab active" id="cr-tab-hsl" onclick="crSetMode('hsl')">HSL</button>
+          <button class="cr-tab" id="cr-tab-lab" onclick="crSetMode('lab')">LAB ΔE</button>
+          <button class="cr-tab" id="cr-tab-webgl" onclick="crSetMode('webgl')">WebGL</button>
+        </div>
+        <div class="cr-algo-desc" id="cr-algo-desc">Fast, predictable. Shifts Hue within ± tolerance.</div>
+      </div>
+
+      <div class="cr-sec">
+        <h3>From color</h3>
+        <div class="cr-color-row">
+          <label>Pick</label>
+          <div class="cr-swatch" id="cr-from-swatch" style="background:#e07020" onclick="document.getElementById('cr-from-cp').click()"></div>
+          <input type="color" id="cr-from-cp" value="#e07020" style="display:none" oninput="crFromColor=this.value;crUpdateSwatch('cr-from-swatch','cr-from-hex',this.value);if(crMode==='webgl')crWebGLRender();">
+          <span class="cr-hex" id="cr-from-hex">#e07020</span>
+          <button class="cr-eyedrop" id="cr-eyedrop-btn" onclick="crToggleEyedrop()">✦ pick</button>
+        </div>
+      </div>
+
+      <div class="cr-sec">
+        <h3>To color</h3>
+        <div class="cr-color-row">
+          <label>Pick</label>
+          <div class="cr-swatch" id="cr-to-swatch" style="background:#20a050" onclick="document.getElementById('cr-to-cp').click()"></div>
+          <input type="color" id="cr-to-cp" value="#20a050" style="display:none" oninput="crToColor=this.value;crUpdateSwatch('cr-to-swatch','cr-to-hex',this.value);if(crMode==='webgl')crWebGLRender();">
+          <span class="cr-hex" id="cr-to-hex">#20a050</span>
+        </div>
+      </div>
+
+      <div class="cr-sec">
+        <h3>Tolerance</h3>
+        <div class="srow">
+          <label id="cr-tol-label">Hue ±</label>
+          <input type="range" id="cr-tol" min="1" max="60" value="25" step="1" oninput="crTol=+this.value;document.getElementById('cr-tol-nv').value=this.value;if(crMode==='webgl')crWebGLRender();">
+          <input type="number" class="nv" id="cr-tol-nv" value="25" min="1" max="60" oninput="crTol=+this.value;document.getElementById('cr-tol').value=this.value;if(crMode==='webgl')crWebGLRender();">
+        </div>
+        <div class="srow">
+          <label>Feather</label>
+          <input type="range" id="cr-feat" min="0" max="40" value="10" step="1" oninput="crFeat=+this.value;document.getElementById('cr-feat-nv').value=this.value;if(crMode==='webgl')crWebGLRender();">
+          <input type="number" class="nv" id="cr-feat-nv" value="10" min="0" max="40" oninput="crFeat=+this.value;document.getElementById('cr-feat').value=this.value;if(crMode==='webgl')crWebGLRender();">
+        </div>
+        <div class="cr-mask-row">
+          <input type="checkbox" id="cr-show-mask" onchange="crToggleMask(this.checked)">
+          <label for="cr-show-mask">Show replacement mask (grayscale)</label>
+        </div>
+      </div>
+
+      <div class="cr-sec">
+        <button class="btn accent" onclick="crApply()">Apply replacement</button>
+        <button class="btn" onclick="crReset()">Reset image</button>
+        <button class="btn" onclick="crDownload()" id="cr-dl-btn" disabled>Download PNG</button>
+      </div>
+
+    </div>
+  </div>
+</div>

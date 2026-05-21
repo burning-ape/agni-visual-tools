@@ -1,0 +1,18 @@
+/* ── Normal Map ── */
+.ng-canvas-area{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;background:#000;min-width:0}
+.ng-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd);border:1px solid var(--bd);width:100%;height:100%;max-width:1200px}
+.ng-view{background:#0a0a0a;display:flex;flex-direction:column;min-width:0;min-height:0;position:relative}
+.ng-view-label{position:absolute;top:8px;left:10px;font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.16em;z-index:2;pointer-events:none}
+.ng-view canvas{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+
+.ng-slider-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+.ng-slider-row input[type=range]{flex:1;accent-color:var(--ac)}
+.ng-val{font-family:var(--mono);font-size:11px;color:var(--ink);min-width:36px;text-align:right}
+.ng-hint{font-size:11px;color:var(--dim);margin-top:6px;line-height:1.5}
+.ng-grid-2{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.ng-check{font-size:12px;color:var(--ink);display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.ng-check input{accent-color:var(--ac)}
+
+@media (max-width:760px){
+  .ng-split{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+}

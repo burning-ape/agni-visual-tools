@@ -1,0 +1,89 @@
+<div id="mask-gen-app" class="tool-pane">
+  <div class="mg-header">
+    <button class="mg-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="mg-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Mask Generator</span>
+    </div>
+    <div class="mg-toolbar">
+      <span>Size</span>
+      <input type="number" id="mgW" min="64" max="4096" step="64" value="1024">
+      <span>×</span>
+      <input type="number" id="mgH" min="64" max="4096" step="64" value="1024">
+      <button id="mgResize">Apply</button>
+    </div>
+  </div>
+
+  <div class="mg-body">
+
+    <!-- LEFT: layers -->
+    <div class="mg-left">
+      <div class="mg-layers-head">
+        <span>Layers</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="mg-add" id="mgLoadImg" title="Load image as layer" style="font-size:13px">🖼</span>
+          <span class="mg-add" id="mgAddBlank" title="Add blank layer">+</span>
+        </div>
+      </div>
+      <input type="file" id="mgImgIn" accept="image/*" style="display:none">
+      <div class="mg-layers-list" id="mgLayersList"><div class="empty">no layers — add one with + or 🖼</div></div>
+    </div>
+
+    <!-- CENTER: canvas -->
+    <div class="mg-canvas-area" id="mgCanvasArea">
+      <canvas id="mgPreview"></canvas>
+    </div>
+
+    <!-- RIGHT: settings + session -->
+    <div class="mg-right">
+      <div class="mg-sec">
+        <h3>Layer Adjustments</h3>
+        <div id="mgAdjustments">
+          <div class="empty" style="padding:8px 0">select a layer</div>
+        </div>
+      </div>
+
+      <div class="mg-sec">
+        <h3>Generate (writes to selected layer)</h3>
+        <select id="mgGenType" style="width:100%;padding:6px;background:var(--s2);color:var(--ink);border:1px solid var(--bd);font-family:inherit;font-size:12px;margin-bottom:8px">
+          <option value="solid">Solid Color</option>
+          <option value="gradient_linear">Linear Gradient</option>
+          <option value="gradient_radial">Radial Gradient</option>
+          <option value="white_noise">White Noise</option>
+          <option value="value_noise">Value Noise (smooth)</option>
+          <option value="perlin">Perlin Noise</option>
+          <option value="fractal">Fractal Noise (fBm)</option>
+          <option value="cellular">Cellular / Worley</option>
+          <option value="voronoi">Voronoi</option>
+          <option value="stripes">Stripes</option>
+          <option value="checker">Checkerboard</option>
+          <option value="dots">Dots Grid</option>
+        </select>
+        <div id="mgGenParams"></div>
+        <button class="btn accent" id="mgGenApply" disabled>Generate</button>
+      </div>
+
+      <div class="mg-sec">
+        <h3>Layer Actions</h3>
+        <button class="btn" id="mgGreyToAlpha" disabled>Greyscale → Alpha</button>
+        <button class="btn" id="mgInvert" disabled>Invert</button>
+        <button class="btn" id="mgDownloadLayer" disabled>Download Layer (PNG)</button>
+      </div>
+
+      <div class="mg-sec">
+        <h3>Composite</h3>
+        <button class="btn accent" id="mgSaveSession" disabled>💾 Save to Session</button>
+        <button class="btn" id="mgDownloadComp">Download Composite</button>
+      </div>
+
+      <div class="mg-session">
+        <h3 style="font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:1px">Session Masks</h3>
+        <div class="mg-session-list" id="mgSessionList"><div class="empty" style="padding:8px 0">no saved masks</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

@@ -1,0 +1,85 @@
+<div id="at-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Atlas Packer</span>
+    </div>
+  </div>
+
+  <div class="bgr-body">
+    <div class="at-canvas-area" id="atCanvasArea">
+      <div class="bgr-drop" id="atDrop">
+        <span class="di">DROP</span>
+        Sprites (multiple)
+        <div class="ds">PNG · JPG · WebP — packs into one atlas with JSON</div>
+      </div>
+      <input type="file" id="atFileIn" accept="image/*" multiple style="display:none">
+      <div class="at-preview-wrap" id="atPreviewWrap" style="display:none">
+        <canvas id="atPreview"></canvas>
+        <div class="at-status" id="atStatus"></div>
+        <button class="at-add-more" id="atAddMore" type="button">+ add more sprites</button>
+      </div>
+      <div class="at-drop-overlay" id="atDropOverlay">drop to add</div>
+    </div>
+
+    <div class="bgr-side">
+      <div>
+        <h3>Sprites</h3>
+        <div class="at-sprite-list" id="atSpriteList">
+          <div class="at-empty">none loaded</div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Layout</h3>
+        <select id="atAlgo" class="sm-select">
+          <option value="binpack" selected>Bin-packing (tight)</option>
+          <option value="grid">Uniform grid</option>
+        </select>
+      </div>
+
+      <div>
+        <h3>Max atlas size</h3>
+        <select id="atMax" class="sm-select">
+          <option value="512">512</option>
+          <option value="1024">1024</option>
+          <option value="2048" selected>2048</option>
+          <option value="4096">4096</option>
+          <option value="8192">8192</option>
+        </select>
+      </div>
+
+      <div>
+        <h3>Padding (px)</h3>
+        <div class="ng-slider-row">
+          <input type="range" id="atPad" min="0" max="32" step="1" value="2">
+          <span class="ng-val" id="atPadVal">2</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>Options</h3>
+        <label class="ng-check"><input type="checkbox" id="atPot" checked> snap atlas size to power-of-2</label>
+        <label class="ng-check"><input type="checkbox" id="atTrim"> trim transparent edges per sprite</label>
+        <label class="ng-check"><input type="checkbox" id="atShowGuides" checked> show sprite outlines in preview</label>
+      </div>
+
+      <div>
+        <h3>JSON format</h3>
+        <select id="atFormat" class="sm-select">
+          <option value="agni" selected>Agni (simple)</option>
+          <option value="phaser">Phaser 3 / TexturePacker</option>
+          <option value="json-array">JSON-Array (generic)</option>
+        </select>
+      </div>
+
+      <div>
+        <h3>Export</h3>
+        <button class="btn accent" id="atPack" disabled>Download PNG + JSON</button>
+        <div class="ng-hint" id="atInfo">Drop sprites to begin.</div>
+      </div>
+    </div>
+  </div>
+</div>

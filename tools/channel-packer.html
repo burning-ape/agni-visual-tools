@@ -1,0 +1,146 @@
+<div id="cp-app" class="tool-pane">
+  <div class="bgr-header">
+    <button class="bgr-back" onclick="goHome()" title="Back to menu">←</button>
+    <div class="bgr-title">
+      <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1 C7 5, 11 6, 11 10 C11 13, 9 15, 7 15 C5 15, 3 13, 3 10 C3 7, 5 6, 5 4 C5 5.5, 6 6, 7 6 Z" fill="#ff5a1f"/></svg>
+      <span>Agni</span>
+      <span class="crumb">/ Channel Packer</span>
+    </div>
+  </div>
+
+  <div class="cp-body">
+    <div class="cp-left">
+
+      <div class="cp-preset-row">
+        <h3>Preset</h3>
+        <select id="cpPreset" class="sm-select">
+          <option value="custom">Custom</option>
+          <option value="orm">ORM (Unreal): R=AO  G=Roughness  B=Metallic</option>
+          <option value="rma">RMA: R=Roughness  G=Metallic  B=AO</option>
+          <option value="mra">MRA: R=Metallic  G=Roughness  B=AO</option>
+          <option value="hrgm">HRGM: R=Height G=Roughness B=Metallic A=Mask</option>
+        </select>
+      </div>
+
+      <div class="cp-grid">
+        <div class="cp-slot" data-channel="R">
+          <div class="cp-slot-head">
+            <span class="cp-ch-label cp-ch-r">R</span>
+            <input class="cp-name" id="cpRName" value="Roughness">
+          </div>
+          <div class="cp-drop" data-target="R">
+            <span class="di">+</span>
+            <span class="cp-drop-hint">drop or click</span>
+          </div>
+          <input type="file" id="cpInR" accept="image/*" style="display:none">
+          <div class="cp-slot-ctrl">
+            <select class="cp-from" data-channel="R">
+              <option value="r">from R</option>
+              <option value="g">from G</option>
+              <option value="b">from B</option>
+              <option value="a">from A</option>
+              <option value="luma" selected>luminance</option>
+            </select>
+            <label class="ng-check"><input type="checkbox" class="cp-inv" data-channel="R"> invert</label>
+            <button class="cp-rm" data-channel="R" title="Remove">✕</button>
+          </div>
+        </div>
+
+        <div class="cp-slot" data-channel="G">
+          <div class="cp-slot-head">
+            <span class="cp-ch-label cp-ch-g">G</span>
+            <input class="cp-name" id="cpGName" value="Metallic">
+          </div>
+          <div class="cp-drop" data-target="G">
+            <span class="di">+</span>
+            <span class="cp-drop-hint">drop or click</span>
+          </div>
+          <input type="file" id="cpInG" accept="image/*" style="display:none">
+          <div class="cp-slot-ctrl">
+            <select class="cp-from" data-channel="G">
+              <option value="r">from R</option>
+              <option value="g">from G</option>
+              <option value="b">from B</option>
+              <option value="a">from A</option>
+              <option value="luma" selected>luminance</option>
+            </select>
+            <label class="ng-check"><input type="checkbox" class="cp-inv" data-channel="G"> invert</label>
+            <button class="cp-rm" data-channel="G" title="Remove">✕</button>
+          </div>
+        </div>
+
+        <div class="cp-slot" data-channel="B">
+          <div class="cp-slot-head">
+            <span class="cp-ch-label cp-ch-b">B</span>
+            <input class="cp-name" id="cpBName" value="AO">
+          </div>
+          <div class="cp-drop" data-target="B">
+            <span class="di">+</span>
+            <span class="cp-drop-hint">drop or click</span>
+          </div>
+          <input type="file" id="cpInB" accept="image/*" style="display:none">
+          <div class="cp-slot-ctrl">
+            <select class="cp-from" data-channel="B">
+              <option value="r">from R</option>
+              <option value="g">from G</option>
+              <option value="b">from B</option>
+              <option value="a">from A</option>
+              <option value="luma" selected>luminance</option>
+            </select>
+            <label class="ng-check"><input type="checkbox" class="cp-inv" data-channel="B"> invert</label>
+            <button class="cp-rm" data-channel="B" title="Remove">✕</button>
+          </div>
+        </div>
+
+        <div class="cp-slot" data-channel="A">
+          <div class="cp-slot-head">
+            <span class="cp-ch-label cp-ch-a">A</span>
+            <input class="cp-name" id="cpAName" value="(unused)">
+          </div>
+          <div class="cp-drop" data-target="A">
+            <span class="di">+</span>
+            <span class="cp-drop-hint">drop or click</span>
+          </div>
+          <input type="file" id="cpInA" accept="image/*" style="display:none">
+          <div class="cp-slot-ctrl">
+            <select class="cp-from" data-channel="A">
+              <option value="r">from R</option>
+              <option value="g">from G</option>
+              <option value="b">from B</option>
+              <option value="a">from A</option>
+              <option value="luma" selected>luminance</option>
+            </select>
+            <label class="ng-check"><input type="checkbox" class="cp-inv" data-channel="A"> invert</label>
+            <button class="cp-rm" data-channel="A" title="Remove">✕</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cp-right">
+      <div>
+        <h3>Output size</h3>
+        <select id="cpSize" class="sm-select">
+          <option value="0" selected>Match largest input</option>
+          <option value="256">256</option>
+          <option value="512">512</option>
+          <option value="1024">1024</option>
+          <option value="2048">2048</option>
+          <option value="4096">4096</option>
+        </select>
+      </div>
+      <div>
+        <h3>Preview</h3>
+        <div class="cp-preview-wrap">
+          <canvas id="cpPreview"></canvas>
+        </div>
+        <div class="ng-hint">RGB preview only. Alpha is exported but not shown.</div>
+      </div>
+      <div>
+        <h3>Output</h3>
+        <button class="btn accent" id="cpExport" disabled>Download Packed PNG</button>
+        <div class="ng-hint" id="cpStatus">Drop at least one channel to enable export.</div>
+      </div>
+    </div>
+  </div>
+</div>

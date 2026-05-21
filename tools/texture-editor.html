@@ -1,0 +1,125 @@
+<div id="editor-app" class="tool-pane" style="position:fixed;inset:0;z-index:50">
+<div id="clip">
+<header>
+  <button onclick="goHome()" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px;padding:0 8px 0 0;line-height:1" title="Back to menu">←</button>
+  <div class="logo">
+    <svg class="flame" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 0 C7 4, 11 5, 11 9 C11 12, 9 14, 7 14 C5 14, 3 12, 3 9 C3 6, 5 5, 5 3 C5 4.5, 6 5, 7 5 Z" fill="#ff5a1f"/><path d="M2 14 L12 14 L11 18 L3 18 Z" fill="#0a0a0a" stroke="#ff5a1f" stroke-width="0.8"/></svg>
+    <span>Agni</span>
+    <span class="slash">/</span>
+    <span class="sub">Texture Editor</span>
+  </div>
+  <div class="hsep"></div>
+  <div class="hhint">LMB rotate · RMB pan · Scroll zoom · <kbd>⌃Z</kbd> / <kbd>⌃Y</kbd></div>
+</header>
+
+<div id="scale-wrap" style="flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden">
+
+<div class="main">
+
+  <!-- LEFT: Layers + Masks -->
+  <div class="left-panel">
+    <div class="lp-sect layers-sect">
+      <div class="lp-head">
+        <span>Layers</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="lp-add" id="dupLayerBtn" title="Duplicate selected layer" style="display:none">⧉</span>
+          <span class="lp-add" id="loadImgLayerBtn" title="Load image as new layer" style="font-size:13px">🖼</span>
+          <span class="lp-add" id="addLayerBtn" title="Add blank layer">+</span>
+        </div>
+      </div>
+      <input type="file" id="layerImgIn" accept="image/*">
+      <div class="layers-list" id="layersList"><div class="empty">no layers</div></div>
+    </div>
+    <div class="lp-sect masks-sect" id="masksSect">
+      <div class="lp-head" style="cursor:pointer" id="masksHead">
+        <span>Masks</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="lp-add" id="addMaskBtn" title="Load mask image">+</span>
+          <span id="masksArrow" style="font-size:14px;color:var(--dim);transition:transform .15s">▾</span>
+        </div>
+      </div>
+      <div class="masks-list" id="masksList"></div>
+      <input type="file" id="maskIn" accept="image/*,.tif,.tiff">
+    </div>
+  </div>
+
+  <div id="vp"><div class="hint3d">Click model to place decal</div></div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+
+    <div class="sec">
+      <div class="sec-title">Model</div>
+      <button class="btn" onclick="document.getElementById('fbxIn').click()">Load FBX</button>
+      <input type="file" id="fbxIn" accept=".fbx">
+      <button class="btn" id="flipBtn" disabled>⇅ Flip UV</button>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Viewport</div>
+      <div class="crow">
+        <label>Background</label>
+        <input type="color" id="bgColor" value="#1e2028">
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Decals</div>
+      <button class="btn" onclick="document.getElementById('decalIn').click()">+ Add Decal Image</button>
+      <input type="file" id="decalIn" accept="image/*">
+      <div class="pal" id="palette"><div class="empty">palette empty</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Tool</div>
+      <div class="btn-row" id="toolBtns">
+        <button class="btn tool-btn active" data-tool="decal">Decal</button>
+        <button class="btn tool-btn" data-tool="blur">Blur</button>
+        <button class="btn tool-btn" data-tool="stamp">Stamp</button>
+      </div>
+      <div id="stampHint" style="display:none;margin-top:7px;font-size:11px;color:var(--dim);line-height:1.5">
+        <b style="color:var(--tl)">Ctrl+Click</b> to set sample point<br>
+        then drag to paint
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Brush</div>
+      <div class="srow">
+        <label>Size</label>
+        <input type="range" id="size" min="0" max="100" step="1" value="15">
+        <input type="number" class="nv" id="szVal" min="0" max="100" step="1" value="15">
+      </div>
+      <div class="srow">
+        <label>Rotation</label>
+        <input type="range" id="rot" min="0" max="360" step="1" value="0">
+        <input type="number" class="nv" id="rotVal" min="0" max="360" step="1" value="0">
+      </div>
+      <div class="srow" id="strengthRow">
+        <label>Strength</label>
+        <input type="range" id="strength" min="1" max="20" step="1" value="6">
+        <input type="number" class="nv" id="stVal" min="1" max="20" step="1" value="6">
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">History</div>
+      <div class="btn-row">
+        <button class="btn" id="undoBtn" disabled>↶ Undo</button>
+        <button class="btn" id="redoBtn" disabled>Redo ↷</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Export</div>
+      <button class="btn accent" id="exportBtn" disabled>Download PNG</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="statusbar"><b id="statusTxt">Load an FBX to get started</b></div>
+
+</div><!-- /scale-wrap -->
+</div><!-- /clip -->
+</div><!-- /editor-app -->
